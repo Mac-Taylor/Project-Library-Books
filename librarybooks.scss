@@ -25,7 +25,8 @@ main ul{
     display: inline-block;
     border: solid black 1pt;
     @include grid-column(4);
-        button{
+
+        button {
             width: 40%;
             padding: 5%;
             margin: 2%;
