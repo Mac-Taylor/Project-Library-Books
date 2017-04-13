@@ -24,7 +24,7 @@ main ul{
     li{
     display: inline-block;
     border: solid black 1pt;
-    @include grid-column(3);
+    @include grid-column(4);
 
         button {
             width: 40%;
