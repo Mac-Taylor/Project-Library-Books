@@ -54,19 +54,19 @@ function generateBook(input) {
 
     //cover image
     let coverimage = document.createElement('img');
-    coverimage.src = books[0].cover;
+    coverimage.src = input.cover;
     
     //h2 section which displays book tite
     let sectionheader = document.createElement('h2');
-    sectionheader.textContent = books[0].title;
+    sectionheader.textContent = input.title;
     
     //first ptag that generages author name
     let text1 = document.createElement('p');
-    text1.textContent = books[0].author;
+    text1.textContent = input.author;
    
    //second ptag that generate the price
     let text2 = document.createElement('p');
-    text2.textContent = books[0].price;
+    text2.textContent = '$' + input.price;
 
     //BUY button
     let bttn1 = document.createElement('button');
@@ -89,15 +89,28 @@ function generateBook(input) {
 
 
 window.addEventListener('load', function (){
-    for (let i = 0; i < books.length; i++) {
-        console.log(books[i].title);
-        console.log(books[i].author);
-        console.log(books[i].price);
-        generateBook(books[i]);
-    }
-    //let request = new XMLHttpRequest();
-    // request.open('GET', 'API url');
 
+        let request = new XMLHttpRequest();
+        request.open('GET', 'https://tiy-28202.herokuapp.com/books');
+        request.addEventListener('load', function(){
+        let response = JSON.parse(request.responseText);
+                    console.log(response);
 
+        for (let i = 0; i < response.books.length; i++) {
+            let input = {
+                title: response.books[i].title,
+                author: response.books[i].author,
+                price: response.books[i].price,
+                cover: response.books[i].cover,
+            }
+        generateBook(input);  
+        }; 
+    });   
+  request.send(); 
 });
+
+
+
+
+
 
