@@ -88,8 +88,7 @@ function generateBook(input) {
 };
 
 
-window.addEventListener('load', function (){
-
+function getAllBooks() {
         let request = new XMLHttpRequest();
         request.open('GET', 'https://tiy-28202.herokuapp.com/books');
         request.addEventListener('load', function(){
@@ -106,8 +105,45 @@ window.addEventListener('load', function (){
         generateBook(input);  
         }; 
     });   
-  request.send(); 
+  request.send();
+}
+
+
+//define AJAX 'GET request as a function then...
+window.addEventListener('load', function() {
+
+    getAllBooks();
+
+    let addbtn = document.querySelector('#add-btn');
+    addbtn.addEventListener('click', function() {
+    let name = document.querySelector('#name');
+    let author = document.querySelector('#author');
+
+    // .value property on <input> elements gives us
+    // th evalue the user entered
+
+    console.log(name.value);
+
+    let request = new XMLHttpRequest();
+    request.open('POST', 'https://tiy-28202.herokuapp.com/books');
+    request.addEventListener('load', function () {
+        console.log('received response');
+    });
+    
+    request.send(JSON.stringify({
+        title: name.value,
+        author: author.value,   
+      }));
+    });
 });
+
+
+
+
+
+
+
+
 
 
 
